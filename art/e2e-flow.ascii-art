@@ -1,0 +1,51 @@
+
+ .------.            .---------------.            .------.
+|  NDC   |          |       IdO       |          |   CA   |
++--------+          +--------+--------+          +--------+
+| Client |          | Server | Client |          | Server |
+'---+----'          '----+---+---+----'          '----+---'
+    |                    |       |                    |
+    |   Order            |       |                    |
+    |   Signature        |       |                    |
+    o------------------->|       |                    |
+    |                    |       |                    |
+    |   [ No identity ]  |       |                    |
+    |   [ validation  ]  |       |                    |
+    |                    |       |                    |
+    |   CSR              |       |                    |
+    |   Signature        |       |                    |
+    o------------------->|       |                    |
+    |   Acknowledgement  |       |   Order'           |
+    |<-------------------o       |   Signature        |
+    |                    |       o------------------->|
+    |                    |       |         Required   |
+    |                    |       |   Authorizations   |
+    |                    |       |<-------------------o
+    |                    |       |   Responses        |
+    |                    |       |   Signature        |
+    |                    |       o------------------->|
+    |                    |       |                    |
+    |                    |       |<~~~~Validation~~~~>|
+    |                    |       |                    |
+    |                    |       |   CSR              |
+    |                    |       |   Signature        |
+    |                    |       o------------------->|
+    |                    |       |   Acknowledgement  |
+    |                    |       |<-------------------o
+    |                    |       |                    |
+    |<~~Await issuance~->|       |<~~Await issuance~~>|
+    |                                                 |
+    |     (unauthenticated) GET STAR certificate      |
+    o------------------------------------------------>|
+    |                 Certificate #1                  |
+    |<------------------------------------------------o
+    |     (unauthenticated) GET STAR certificate      |
+    o------------------------------------------------>|
+    |                 Certificate #2                  |
+    |<------------------------------------------------o
+    |                     [...]                       |
+    |     (unauthenticated) GET STAR certificate      |
+    o------------------------------------------------>|
+    |                 Certificate #n                  |
+    |<------------------------------------------------o
+
