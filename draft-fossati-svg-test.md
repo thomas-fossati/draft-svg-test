@@ -136,8 +136,10 @@ The SVG file is created from its ASCII art equivalent as explained in
   <figure anchor="fig-endtoend"
           title="End to end STAR delegation flow">
     <artset>
-      <artwork type="ascii-art" src="art/e2e-flow.ascii-art" />
-      <artwork type="svg" src="art/e2e-flow.svg" />
+      <artwork type="ascii-art"
+               src="art/e2e-flow.ascii-art" />
+      <artwork type="svg"
+               src="art/e2e-flow.svg" />
     </artset>
   </figure>
 </t>
@@ -149,48 +151,99 @@ The result is shown in {{fig-endtoend}}.
   <figure anchor="fig-endtoend"
           title="End to end STAR delegation flow">
     <artset>
-      <artwork type="ascii-art" src="art/e2e-flow.ascii-art" />
-      <artwork type="svg" src="art/e2e-flow.svg" />
+      <artwork type="ascii-art"
+               src="art/e2e-flow.ascii-art" />
+      <artwork type="svg"
+               src="art/e2e-flow.svg" />
     </artset>
   </figure>
 </t>
 
 ## Lots of Boxes and Arrows
 
+~~~xml
 <t>
   <figure anchor="fig-cdni-dns-redirection"
           title="DNS Redirection">
     <artset>
-      <artwork type="ascii-art" src="art/cdni-dns-redirection.ascii-art" />
-      <artwork type="svg" src="art/cdni-dns-redirection.svg" />
+      <artwork type="ascii-art"
+               src="art/cdni-dns-redirection.ascii-art" />
+      <artwork type="svg"
+               src="art/cdni-dns-redirection.svg" />
+    </artset>
+  </figure>
+</t>
+~~~
+
+<t>
+  <figure anchor="fig-cdni-dns-redirection"
+          title="DNS Redirection">
+    <artset>
+      <artwork type="ascii-art"
+               src="art/cdni-dns-redirection.ascii-art" />
+      <artwork type="svg"
+               src="art/cdni-dns-redirection.svg" />
     </artset>
   </figure>
 </t>
 
+
 ## Even More Boxes and Numbered Arrows
+
+~~~xml
+<t>
+  <figure anchor="fig-cdni-flow"
+          title="Two levels delegation in CDNI">
+    <artset>
+      <artwork type="ascii-art"
+               src="art/cdni-delegation.ascii-art" />
+      <artwork type="svg"
+               src="art/cdni-delegation.svg" />
+    </artset>
+  </figure>
+</t>
+~~~
 
 <t>
   <figure anchor="fig-cdni-flow"
           title="Two levels delegation in CDNI">
     <artset>
-      <artwork type="ascii-art" src="art/cdni-delegation.ascii-art" />
-      <artwork type="svg" src="art/cdni-delegation.svg" />
+      <artwork type="ascii-art"
+               src="art/cdni-delegation.ascii-art" />
+      <artwork type="svg"
+               src="art/cdni-delegation.svg" />
     </artset>
   </figure>
 </t>
 
+
 ## And Another One
+
+~~~xml
+<t>
+  <figure anchor="fig-stir-flow"
+          title="Delegation in STIR">
+    <artset>
+      <artwork type="ascii-art"
+               src="art/stir-delegation.ascii-art" />
+      <artwork type="svg"
+               src="art/stir-delegation.svg" />
+    </artset>
+  </figure>
+</t>
+~~~
 
 <t>
   <figure anchor="fig-stir-flow"
           title="Delegation in STIR">
     <artset>
-      <artwork type="ascii-art" src="art/stir-delegation.ascii-art" />
-      <artwork type="svg" src="art/stir-delegation.svg" />
+      <artwork type="ascii-art"
+               src="art/stir-delegation.ascii-art" />
+      <artwork type="svg"
+               src="art/stir-delegation.svg" />
     </artset>
   </figure>
 </t>
-
 
 # IANA Considerations
 
