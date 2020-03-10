@@ -27,10 +27,6 @@ next_ver ?= $(shell printf "%.2d" $$((1$(current_ver)-99)))
 endif
 next := $(draft)-$(next_ver)
 
-# CSR templates
-csr_dir := $(root)CSR-template
-csr_src := $(wildcard $(csr_dir)/*.json)
-
 # ASCII -> SVG art
 art_dir := $(root)art
 art_src := $(wildcard $(art_dir)/*.ascii-art)
@@ -44,7 +40,7 @@ all latest: $(draft).txt $(draft).html
 
 submit: $(next).xml $(next).txt
 
-$(draft).txt $(draft).html: $(art_svg) $(csr_src)
+$(draft).xml $(draft).txt $(draft).html: $(art_svg)
 
 idnits: $(next).txt
 	$(idnits) $<
