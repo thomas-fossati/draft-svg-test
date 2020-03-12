@@ -103,14 +103,11 @@ To inline the diagrams you need to do the following:
 ~~~ sh
 $ kramdown-rfc2629 --v3 \
     draft-fossati-svg-test.md > draft-fossati-svg-test.xml
-$ xml2rfc --v3 --preptool draft-fossati-svg-test.xml
-$ xml2rfc --v3 --expand draft-fossati-svg-test.prepped.xml
-$ mv draft-fossati-svg-test.prepped.exp.xml \
-    draft-fossati-svg-test.xml
-$ rm -f draft-fossati-svg-test.prepped.xml
+$ xml2rfc --v3 --preptool \
+    draft-fossati-svg-test.xml -o draft-fossati-svg-test.xml
 ~~~
 
-The "prepped" and "expanded" draft-fossati-svg-test.xml inlines both the ASCII
+The "prepped" draft-fossati-svg-test.xml inlines both the ASCII
 and the SVG in the artset and is ready for submission.
 
 Of course, from there you can also do the usual TXT / HTML generation:
