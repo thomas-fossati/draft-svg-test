@@ -2,7 +2,7 @@
 title: SVG Fun with kramdown-rfc2629
 abbrev: SVG Tests
 docname: draft-fossati-svg-test-03
-category: exp
+category: info
 
 ipr: trust200902
 area: Security
@@ -59,7 +59,7 @@ $ pip install svgcheck
 Install kramdown-rfc2629 (at least 1.3.2):
 
 ~~~ bash
-# gem install kramdown-rfc2629 -v '>= 1.3.2'
+$ gem install kramdown-rfc2629 -v '>= 1.3.2'
 ~~~
 
 # Draw
