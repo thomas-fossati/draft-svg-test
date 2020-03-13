@@ -11,6 +11,16 @@ endif
 
 draft := draft-fossati-svg-test
 
-all: $(draft).md ; kdrfc -3h $<
+$(draft).xml: $(draft).md
+	kdrfc -3h $< 2>/dev/null
+	xml2rfc --preptool --v3 $@
+	mv $(draft).prepped.xml $@
 
-clean: ; $(RM) $(draft).txt $(draft).html $(draft).xml metadata.min.js
+CLEANFILES := $(draft).txt
+CLEANFILES += $(draft).html
+CLEANFILES += $(draft).xml
+CLEANFILES += $(draft).prepped.xml
+CLEANFILES += metadata.min.js
+
+clean: ; $(RM) $(CLEANFILES)
+.PHONY: clean

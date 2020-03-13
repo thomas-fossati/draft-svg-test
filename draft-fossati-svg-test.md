@@ -1,7 +1,7 @@
 ---
 title: SVG Tests
 abbrev: SVG Tests
-docname: draft-fossati-svg-test-01
+docname: draft-fossati-svg-test-02
 category: exp
 
 ipr: trust200902
@@ -93,7 +93,11 @@ To go from markdown to XML, HTML and TXT:
 
 ~~~ bash
 $ kdrfc -3h draft-fossati-svg-test.md
+$ xml2rfc --preptool --v3 draft-fossati-svg-test.xml
 ~~~
+
+The "prepped" file, draft-fossati-svg-test.prepped.xml, can now be submitted to
+the datatracker.
 
 # Examples
 
@@ -104,7 +108,7 @@ $ kdrfc -3h draft-fossati-svg-test.md
                  (\/_//`)
    .---.         /   '/
   |     |       0  0   \
-  | Hi! |      /        \
+  | Yo! |      /        \
   |     |     /    __/   \
    '----.    /,  _/ \     \
          \_. `-./ )  |     \
