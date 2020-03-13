@@ -1,7 +1,7 @@
 ---
-title: SVG Tests
+title: SVG Fun with kramdown-rfc2629
 abbrev: SVG Tests
-docname: draft-fossati-svg-test-02
+docname: draft-fossati-svg-test-03
 category: exp
 
 ipr: trust200902
