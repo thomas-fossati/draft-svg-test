@@ -47,200 +47,132 @@ This document assumes a kramdown-rfc2629 based editing flow.
 
 {::boilerplate bcp14}
 
-# Code Layout
+## Tools
 
-The code is structured as follows:
+Install goat and svgcheck (Go and Python are obvious preconditions):
 
-~~~
-├── Makefile
-├── art
-│   ├── cdni-delegation.ascii-art
-│   ├── cdni-dns-redirection.ascii-art
-│   ├── e2e-flow.ascii-art
-│   ├── stir-delegation.ascii-art
-│   └── stir-delegation.svg
-└── draft-fossati-svg-test.md
-~~~
-
-In particular, the art directory contains the diagrams in ASCII art.
-
-# From ASCII art to SVG
-{: #sec-from-ascii-to-svg}
-
-
-The Makefile contains bunch of variables and a pattern rule to deal with
-automatic generation of SVG from ASCII using a Golang tool called goat.
-Another tool, svgcheck, is used to make sure xml2rfc will like the SVG.
-
-~~~
-# The "art" variables:
-
-art_src := $(wildcard $(art_dir)/*.ascii-art)
-art_svg := $(art_src:.ascii-art=.svg)
-
-
-# The pattern rule used to transform each and every ASCII
-# art into SVG:
-
-%.svg: %.ascii-art
-    @$(goat) $< | $(svgcheck) -r -o $@ 2>/dev/null || true
-~~~
-
-To install goat and svgcheck, do:
-
-~~~ sh
+~~~ bash
 $ go get github.com/blampe/goat
 $ pip install svgcheck
 ~~~
 
-# Building the XML
+Install kramdown-rfc2629 (at least 1.3.2):
 
-The Submit tool on the Datatracker wants the submitted XML to be self
-contained.
-
-To inline the diagrams you need to do the following:
-
-~~~ sh
-$ kramdown-rfc2629 --v3 \
-    draft-fossati-svg-test.md > draft-fossati-svg-test.xml
-$ xml2rfc --v3 --preptool \
-    draft-fossati-svg-test.xml -o draft-fossati-svg-test.xml
+~~~ bash
+# gem install kramdown-rfc2629 -v '>= 1.3.2'
 ~~~
 
-The "prepped" draft-fossati-svg-test.xml inlines both the ASCII
-and the SVG in the artset and is ready for submission.
+# Draw
 
-Of course, from there you can also do the usual TXT / HTML generation:
+Two options:
 
-~~~ sh
-$ xml2rfc --v3 draft-fossati-svg-test.xml \
-    draft-fossati-svg-test.txt
-$ xml2rfc --v3 --html draft-fossati-svg-test.xml \
-    draft-fossati-svg-test.html
+* Either inline your ASCII / UTF-8 art:
+
+~~~
+    ~~~ goat
+     .-.
+    |o o|
+   C| | |D
+    | - |
+    '___'
+    ~~~
+~~~
+
+* Or source from an external file:
+
+~~~
+    ~~~ goat
+    {::include my-diagram.txt}
+    ~~~
+    {: #dia-1 title="My Diagram"}
+~~~
+
+# Build
+
+To go from markdown to XML, HTML and TXT:
+
+~~~ bash
+$ kdrfc -3h draft-fossati-svg-test.md
 ~~~
 
 # Examples
 
-## A Sequence Diagram
+## Hello World
 
-kramdown does not support artset natively.  So the artset must be inserted
-using native xml2rfc syntax.  The SVG is included in artwork as a local file.
-The SVG file is created from its ASCII art equivalent as explained in
-{{sec-from-ascii-to-svg}}.
-
-~~~xml
-<t>
-  <figure anchor="fig-endtoend"
-          title="End to end STAR delegation flow">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/e2e-flow.ascii-art" />
-      <artwork type="svg"
-               src="art/e2e-flow.svg" />
-    </artset>
-  </figure>
-</t>
+~~~ goat
+                   / /
+                 (\/_//`)
+   .---.         /   '/
+  |     |       0  0   \
+  | Hi! |      /        \
+  |     |     /    __/   \
+   '----.    /,  _/ \     \
+         \_. `-./ )  |     \
+                 (   |      \
 ~~~
 
-The result is shown in {{fig-endtoend}}.
+## An Inlined Sequence Diagram
 
-<t>
-  <figure anchor="fig-endtoend"
-          title="End to end STAR delegation flow">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/e2e-flow.ascii-art" />
-      <artwork type="svg"
-               src="art/e2e-flow.svg" />
-    </artset>
-  </figure>
-</t>
 
-## Lots of Boxes and Arrows
 
-~~~xml
-<t>
-  <figure anchor="fig-cdni-dns-redirection"
-          title="DNS Redirection">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/cdni-dns-redirection.ascii-art" />
-      <artwork type="svg"
-               src="art/cdni-dns-redirection.svg" />
-    </artset>
-  </figure>
-</t>
+~~~ goat
+ .------.            .---------------.            .------.
+|  NDC   |          |       IdO       |          |   CA   |
++--------+          +--------+--------+          +--------+
+| Client |          | Server | Client |          | Server |
+'---+----'          '----+---+---+----'          '----+---'
+    |                    |       |                    |
+    |   Order            |       |                    |
+    |   Signature        |       |                    |
+    o------------------->|       |                    |
+    |                    |       |                    |
+    |   [ No identity ]  |       |                    |
+    |   [ validation  ]  |       |                    |
+    |                    |       |                    |
+    |   CSR              |       |                    |
+    |   Signature        |       |                    |
+    o------------------->|       |                    |
+    |   Acknowledgement  |       |   Order'           |
+    |<-------------------o       |   Signature        |
+    |                    |       o------------------->|
+    |                    |       |         Required   |
+    |                    |       |   Authorizations   |
+    |                    |       |<-------------------o
+    |                    |       |   Responses        |
+    |                    |       |   Signature        |
+    |                    |       o------------------->|
+    |                    |       |                    |
+    |                    |       |<~~~~Validation~~~~>|
+    |                    |       |                    |
+    |                    |       |   CSR              |
+    |                    |       |   Signature        |
+    |                    |       o------------------->|
+    |                    |       |   Acknowledgement  |
+    |                    |       |<-------------------o
+    |                    |       |                    |
+    |<~~Await issuance~->|       |<~~Await issuance~~>|
+    |                                                 |
+    |     (unauthenticated) GET STAR certificate      |
+    o------------------------------------------------>|
+    |                 Certificate #1                  |
+    |<------------------------------------------------o
+    |     (unauthenticated) GET STAR certificate      |
+    o------------------------------------------------>|
+    |                 Certificate #2                  |
+    |<------------------------------------------------o
+    |                     [...]                       |
+    |     (unauthenticated) GET STAR certificate      |
+    o------------------------------------------------>|
+    |                 Certificate #n                  |
+    |<------------------------------------------------o
 ~~~
 
-<t>
-  <figure anchor="fig-cdni-dns-redirection"
-          title="DNS Redirection">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/cdni-dns-redirection.ascii-art" />
-      <artwork type="svg"
-               src="art/cdni-dns-redirection.svg" />
-    </artset>
-  </figure>
-</t>
+## A Sourced Box and Arrows Diagram
 
-
-## Even More Boxes and Numbered Arrows
-
-~~~xml
-<t>
-  <figure anchor="fig-cdni-flow"
-          title="Two levels delegation in CDNI">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/cdni-delegation.ascii-art" />
-      <artwork type="svg"
-               src="art/cdni-delegation.svg" />
-    </artset>
-  </figure>
-</t>
+~~~ goat
+{::include art/stir-delegation.ascii-art}
 ~~~
-
-<t>
-  <figure anchor="fig-cdni-flow"
-          title="Two levels delegation in CDNI">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/cdni-delegation.ascii-art" />
-      <artwork type="svg"
-               src="art/cdni-delegation.svg" />
-    </artset>
-  </figure>
-</t>
-
-
-## And Another One
-
-~~~xml
-<t>
-  <figure anchor="fig-stir-flow"
-          title="Delegation in STIR">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/stir-delegation.ascii-art" />
-      <artwork type="svg"
-               src="art/stir-delegation.svg" />
-    </artset>
-  </figure>
-</t>
-~~~
-
-<t>
-  <figure anchor="fig-stir-flow"
-          title="Delegation in STIR">
-    <artset>
-      <artwork type="ascii-art"
-               src="art/stir-delegation.ascii-art" />
-      <artwork type="svg"
-               src="art/stir-delegation.svg" />
-    </artset>
-  </figure>
-</t>
+{: #example2 title="STIR Delegation Flow"}
 
 # IANA Considerations
 
@@ -253,6 +185,6 @@ There are none.
 # Acknowledgments
 
 Yaron for pointing out the current limitations in the tooling and providing the
-workaround.
+workaround.  Carsten for working the kramdown magic.
 
 --- back
