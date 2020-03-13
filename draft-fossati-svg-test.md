@@ -49,7 +49,7 @@ This document assumes a kramdown-rfc2629 based editing flow.
 
 ## Tools
 
-Install goat and svgcheck (Go and Python are obvious preconditions):
+Install goat and svgcheck (Go and Python are obvious prerequisites):
 
 ~~~ bash
 $ go get github.com/blampe/goat
