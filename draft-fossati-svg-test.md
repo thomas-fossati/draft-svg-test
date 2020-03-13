@@ -93,11 +93,16 @@ To go from markdown to XML, HTML and TXT:
 
 ~~~ bash
 $ kdrfc -3h draft-fossati-svg-test.md
+~~~
+
+Before submitting to the datatracker the XML file needs to be "prepped":
+
+~~~ bash
 $ xml2rfc --preptool --v3 draft-fossati-svg-test.xml
 ~~~
 
-The "prepped" file, draft-fossati-svg-test.prepped.xml, can now be submitted to
-the datatracker.
+The "prepped" file, draft-fossati-svg-test.prepped.xml in this case, is what
+needs to be uploaded to the datatracker.
 
 # Examples
 
