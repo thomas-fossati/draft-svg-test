@@ -176,7 +176,7 @@ needs to be uploaded to the datatracker.
     |<------------------------------------------------o
 ~~~
 
-## A Sourced Box and Arrows Diagram
+## A Sourced "Box and Arrows" Diagram
 
 ~~~ goat
 {::include art/stir-delegation.ascii-art}
