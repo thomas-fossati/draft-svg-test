@@ -78,7 +78,7 @@ Two options:
     ~~~
 ~~~
 
-* Or source from an external file:
+* Or source it from an external file:
 
 ~~~
     ~~~ goat
